@@ -541,6 +541,10 @@ void fmf2sub_save_sub_file(Fmf2SubApp* app, Fmf2SubConvertModel* model) {
                 count += count / 2;
             }
 
+            if(count == 0) {
+                count = 1;
+            }
+
             FURI_LOG_D(
                 TAG,
                 "octave: %d, duration: %d, freq: %f, dot: %c, pulse: %ld, count: %ld, bpm: %ld",
@@ -807,7 +811,7 @@ static Fmf2SubApp* fmf2sub_app_alloc() {
         0,
         128,
         64,
-        "Music to Sub-GHz  v1.0!\n\n"
+        "Music to Sub-GHz  v1.1!\n\n"
         "Converts music files (.FMF)\n"
         "or (.TXT) to Sub-GHz format\n"
         "(.SUB) Files.   Flip#.sub is\n"
