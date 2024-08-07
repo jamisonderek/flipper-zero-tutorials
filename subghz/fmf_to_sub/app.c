@@ -534,31 +534,61 @@ void fmf2sub_save_sub_file(Fmf2SubApp* app, Fmf2SubConvertModel* model) {
             }
 
             uint32_t pulse = (1000000 / frequency) / 2;
-            uint32_t count = (500000 / (pulse * duration));
-            count *= 120;
+            // 4/4 timing, duration of quarter note (4) is 500ms.
+            float count = (1000000.0 / (pulse * 2.0)) * 2.0 / duration;
+            count *= 120.0f;
             count /= model->data.bpm;
+
             if(dot) {
-                count += count / 2;
+                count += (count / 2.0f);
             }
 
-            if(count == 0) {
-                count = 1;
+            if(count < 1.0f) {
+                count = 1.0;
+            }
+
+            if(duration <= 1) {
+                count *= 0.98; // whole note.
+            } else if(duration <= 2) {
+                count *= 0.95; // half note.
+            } else if(duration <= 4) {
+                count *= 0.90; // quarter note.
+            } else {
+                count *= 0.90;
+            }
+
+            float duration_tone = ((uint32_t)count) * pulse * 2;
+            float duration_beat =
+                (1000000.0 * 2.0 / duration * 120.0 / model->data.bpm) * (dot ? 1.5 : 1.0);
+            float duration_rem = (duration_beat - duration_tone) / 2.0f;
+            uint32_t rem_counter = 1;
+            while(duration_rem > 20000.0f) {
+                rem_counter *= 2;
+                duration_rem /= 2.0;
             }
 
             FURI_LOG_D(
                 TAG,
-                "octave: %d, duration: %d, freq: %f, dot: %c, pulse: %ld, count: %ld, bpm: %ld",
+                "octave: %d, duration: %d, freq: %f, dot: %c, pulse: %ld, count: %f, bpm: %ld",
                 octave,
                 duration,
                 (double)frequency,
                 dot ? 'Y' : 'N',
                 pulse,
-                count,
+                (double)count,
                 model->data.bpm);
+
+            FURI_LOG_D(
+                TAG,
+                "beat: %f  tone: %f  rem-us: %f  rem-cnt: %ld",
+                (double)duration_beat,
+                (double)duration_tone,
+                (double)duration_rem,
+                rem_counter);
 
             fmf2sub_file_write(file, "\nRAW_Data:");
             furi_string_printf(tmp_string, " %ld %ld", pulse, -pulse);
-            for(uint32_t i = 0; i < count; i++) {
+            for(uint32_t i = 0; i < (uint32_t)count; i++) {
                 if(i % 256 == 255) {
                     fmf2sub_file_write(file, "\nRAW_Data:");
                 }
@@ -566,8 +596,10 @@ void fmf2sub_save_sub_file(Fmf2SubApp* app, Fmf2SubConvertModel* model) {
             }
 
             fmf2sub_file_write(file, "\nRAW_Data:");
-            for(int i = 0; i < 3; i++) {
-                fmf2sub_file_write(file, " 20000 -20000");
+            furi_string_printf(
+                tmp_string, " %ld -%ld", (uint32_t)duration_rem, (uint32_t)duration_rem);
+            for(uint32_t i = 0; i < rem_counter; i++) {
+                fmf2sub_file_write(file, furi_string_get_cstr(tmp_string));
             }
 
             octave = -1;
@@ -811,7 +843,7 @@ static Fmf2SubApp* fmf2sub_app_alloc() {
         0,
         128,
         64,
-        "Music to Sub-GHz  v1.1!\n\n"
+        "Music to Sub-GHz  v1.2!\n\n"
         "Converts music files (.FMF)\n"
         "or (.TXT) to Sub-GHz format\n"
         "(.SUB) Files.   Flip#.sub is\n"
