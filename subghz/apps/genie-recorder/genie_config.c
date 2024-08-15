@@ -8,7 +8,7 @@
 #include <dialogs/dialogs.h>
 #include <storage/storage.h>
 #include "toolbox/path.h"
-#include "genie_record_v3_icons.h"
+#include "genie_record_icons.h"
 
 #define TAG "GenieConfig"
 
