@@ -16,7 +16,7 @@ The application also has the ability to send the next code to the garage door op
 
 This application is intended to **replace** the remote you captured. You should not use your original remote again once you are using the Flipper Zero or they will get out of sync. It is recommended that you capture a backup remote you are not using.
 
-The files are stored in `SD Card/apps_data/genie`.  You can copy the `007F1991.gne` file to your Flipper if you want to use a default remote.  On your receiver you will need to sync to the Flipper.
+The files are stored in "SD Card/apps_data/genie".  You can copy the "007F1991.gne" file to your Flipper if you want to use a default remote.  On your receiver you will need to sync to the Flipper.
 
 
 ## Warnings
@@ -46,15 +46,15 @@ WARNING: Do this **at your own risk**. You could damage your remote or Flipper Z
 - Step 1. Be sure you have followed the steps in the [Connecting to remote](#connecting-to-remote) section.
 - Step 2. Be sure you are not near your garage door (or that the door is unplugged). The application will be pushing the button many times and could burn out the motor!
 - Step 3. Run the Genie Recorder application.
-- Step 4. Choose `Config` and set the frequency to the frequency your remote runs at. If you don't know, start with `315MHz` then use `390MHz` if it doesn't work. NOTE: You do not need to do anything with the `Genie File` setting at this time.
-- Step 5. Press `Back` button to return to the main application.
-- Step 6. Choose `Learn` to start capturing and learning signals.
-  - `Remaining code` - how many codes still need to be captured.
-  - `Click` - how many times a click has been sent to the remote.
-  - `Prev` - how many codes were previously captured (no codes captured this session yet).
-  - `Got` - total number of codes captured.
+- Step 4. Choose "Config" and set the frequency to the frequency your remote runs at. If you don't know, start with "315MHz" then use "390MHz" if it doesn't work. NOTE: You do not need to do anything with the "Genie File" setting at this time.
+- Step 5. Press "Back" button to return to the main application.
+- Step 6. Choose "Learn" to start capturing and learning signals.
+  - "Remaining code" - how many codes still need to be captured.
+  - "Click" - how many times a click has been sent to the remote.
+  - "Prev" - how many codes were previously captured (no codes captured this session yet).
+  - "Got" - total number of codes captured.
   - 16 digit hex code - the last code that was captured.
-- Step 7. If you get the message `NO SIGNAL FROM REMOTE?` see the [troubleshooting](#troubleshooting) section.
+- Step 7. If you get the message "NO SIGNAL FROM REMOTE?" see the [troubleshooting](#troubleshooting) section.
 - Step 8. Let it run for 2-3 days (the goal is to capture at least 50,000 signals). If you capture less, it will still work but when it wraps back to the beginning those codes will be rejected by your garage door opener and you would have to resync. To successfully wrap, the remote needs 50,000 button presses. It is recommended you capture all of the codes.
 - Step 9. Press the BACK button to return to the main application.
 
@@ -62,14 +62,14 @@ WARNING: Do this **at your own risk**. You could damage your remote or Flipper Z
 
 - Step 1. Be sure you have followed the steps in the [Capturing codes](#capture-codes) section.
 - Step 2. Run the Genie Recorder application.
-- Step 3. Choose `Config` and set the frequency to the frequency your remote runs at.
-- Step 4. Choose `Genie File` and select the .GNE file that was saved during the [Capture codes](#capture-codes) section steps.
-- Step 5. Press `Back` button to return to the main application.
-- Step 6. Choose `Send` to load the send screen.
-  - `NO .GNE FILE LOADED` - Confirm you selected a valid file in step 4.
-  - `Remote not fully captured` - You should continue to [capture signals](#capture-codes) but you can use the application.
-  - `Press OK to send signal` - Press the OK button to send the next code to the garage door opener.
-  - `Long press OK to reset code.` - This will desync the Flipper from the receiver. It will start over, transmitting the first code.
+- Step 3. Choose "Config" and set the frequency to the frequency your remote runs at.
+- Step 4. Choose "Genie File" and select the .GNE file that was saved during the [Capture codes](#capture-codes) section steps.
+- Step 5. Press "Back" button to return to the main application.
+- Step 6. Choose "Send" to load the send screen.
+  - "NO .GNE FILE LOADED" - Confirm you selected a valid file in step 4.
+  - "Remote not fully captured" - You should continue to [capture signals](#capture-codes) but you can use the application.
+  - "Press OK to send signal" - Press the OK button to send the next code to the garage door opener.
+  - "Long press OK to reset code." - This will desync the Flipper from the receiver. It will start over, transmitting the first code.
 
 ## Troubleshooting
 
@@ -92,4 +92,4 @@ The file format is as follows:
 - 4 bytes: Reserved for future use.
 - 4 bytes x 65536: The dynamic part of the code (0x00000000 if no code has been received)
 
-The file can be found in the `SD Card\apps_data\genie` folder on your Flipper Zero. The name of the file will match the ending 8 characters of the fix code.
+The file can be found in the "SD Card\apps_data\genie" folder on your Flipper Zero. The name of the file will match the ending 8 characters of the fix code.
