@@ -29,17 +29,15 @@ WARNING: Don't run this app near your garage. There is no reason to open the phy
 
 ## Connecting to remote
 
-<img src="wiring.png" width="45%"/>
-<img src="wiring-2.jpg" width="40%"/>
-<p/>
-
 WARNING: Do this **at your own risk**. You could damage your remote or Flipper Zero if done improperly.
 
 - Step 1. Remove the case of your garage door remote.
-- Step 2. Connect GND from Flipper to GND pin on the remote (Shown in green traces for my remote).
-- Step 3. Connect A7 from Flipper to the signal pin on the remote (Shown in orange traces - top button, cyan - middle button for my remote).
+- Step 2. Connect GND from Flipper to GND pin on the remote.
+- Step 3. Connect A7 from Flipper to the signal pin on the remote.
 - Step 4. Put in a fresh battery.
   - Risky Option: Remove the battery and connect 3V3 from Flipper to the battery positive bar on the remote. Be 100% sure that GND on the Flipper is going to GND on the remote (and not the signal pin) and that no wires are shorting. If you are not 100% sure, then DON'T DO THIS! You could damage the remote and the Flipper Zero.
+
+- FOR MORE DETAILS, PLEASE SEE THE README LINKED IN THE REPOSITORY.
 
 ## Capture codes
 
