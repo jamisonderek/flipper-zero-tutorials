@@ -2,7 +2,7 @@
 
 #define GENIE_ABOUT_TEXT                                     \
     "Genie garage door recorder.\n"                          \
-    "Version 3.0\n---\n"                                     \
+    "Version 3.1\n---\n"                                     \
     "This app clicks your remote\n"                          \
     "and records the keys, so you\n"                         \
     "can replay them later with\n"                           \
