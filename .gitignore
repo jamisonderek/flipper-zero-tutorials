@@ -34,7 +34,7 @@
 *.app
 *.i*86
 *.x86_64
-*.hex
+# *.hex -- We want to provide dump files for the user to flash
 
 # Debug files
 *.dSYM/
