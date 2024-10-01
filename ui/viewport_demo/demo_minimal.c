@@ -19,7 +19,7 @@ static int y = 48;
 static void my_draw_callback(Canvas* canvas, void* context) {
     UNUSED(context);
     canvas_set_font(canvas, FontPrimary);
-    canvas_draw_str(canvas, 5, 30, "Hello world");
+    canvas_draw_str(canvas, 5, 30, "Hello, world");
     canvas_draw_str(canvas, x, y, "^");
 }
 

@@ -4,6 +4,9 @@ This is an example of using a ViewPort.  It is a simple Hello World program that
 allows you to move a cursor around the screen with the arrow keys.  Pressing
 the back button will exit the program.
 
+This version does not use a timer to update the screen, so our event queue is an
+InputEvent.  See demo_timer.c for an example that uses a timer.
+
 Uncomment the different view_port_set_orientation() calls to see how the
 orientation of the screen and keypad change.
 
@@ -21,8 +24,8 @@ also the ViewPort section of the User Interface wiki page
 typedef struct AppState AppState;
 struct AppState {
     FuriMutex* mutex;
-    int x;
-    int y;
+    uint32_t x;
+    uint32_t y;
 };
 
 static void my_draw_callback(Canvas* canvas, void* context) {
