@@ -44,14 +44,16 @@ int32_t viewport_demo_minimal_app() {
     gui_add_view_port(gui, view_port, GuiLayerFullscreen);
     dolphin_deed(DolphinDeedPluginGameStart);
     InputEvent event;
-    while(true) {
+    bool running = true;
+    while(running) {
         if(furi_message_queue_get(queue, &event, FuriWaitForever) == FuriStatusOk) {
             if(event.type == InputTypeShort && event.key == InputKeyBack) {
-                break;
+                running = false;
             }
-            view_port_update(view_port);
         }
+        view_port_update(view_port);
     }
+
     view_port_enabled_set(view_port, false);
     furi_message_queue_free(queue);
     gui_remove_view_port(gui, view_port);
