@@ -14,7 +14,7 @@ print("Loaded", loader.fn.title);
 // Initialize textbox
 let textbox = loader.require("textbox");
 textbox.setConfig("end", "text");
-textbox.emptyText();
+textbox.clearText();
 
 // Initialize access to the Flipboard buttons
 let flipboardButton = loader.load("flipboardButton", __dirpath + "/fb_button_api.js");

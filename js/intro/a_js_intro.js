@@ -68,7 +68,7 @@ function demoFlipBoard() {
 
     // Set the configuration for the textbox
     textbox.setConfig("end", "text"); // Focus (start / end), Font (text / hex)
-    textbox.emptyText();
+    textbox.clearText();
     textbox.addText("FlipBoard demo\nMonitoring button presses.\npins:" + pinNames() + "\nPress back to exit.");
     textbox.show(); // non-blocking
 
