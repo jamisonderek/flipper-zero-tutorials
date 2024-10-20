@@ -1,4 +1,5 @@
 #include "wiegand.h"
+#include <expansion/expansion.h>
 
 const GpioPin* const pinD0 = &gpio_ext_pa4;
 const GpioPin* const pinD0mosfet = &gpio_ext_pb3;
@@ -72,7 +73,6 @@ App* app_alloc() {
     App* app = malloc(sizeof(App));
     app->scene_manager = scene_manager_alloc(&basic_scenes_scene_manager_handlers, app);
     app->view_dispatcher = view_dispatcher_alloc();
-    view_dispatcher_enable_queue(app->view_dispatcher);
     view_dispatcher_set_event_callback_context(app->view_dispatcher, app);
     view_dispatcher_set_custom_event_callback(app->view_dispatcher, wiegand_custom_callback);
     view_dispatcher_set_navigation_event_callback(
@@ -116,9 +116,12 @@ int wiegand_app(void* p) {
 
     Gui* gui = furi_record_open(RECORD_GUI);
     view_dispatcher_attach_to_gui(app->view_dispatcher, gui, ViewDispatcherTypeFullscreen);
+    Expansion* expansion = furi_record_open(RECORD_EXPANSION);
+    expansion_disable(expansion);
     scene_manager_next_scene(app->scene_manager, WiegandMainMenuScene);
     view_dispatcher_run(app->view_dispatcher);
-
     app_free(app);
+    expansion_enable(expansion);
+    furi_record_close(RECORD_EXPANSION);
     return 0;
 }
