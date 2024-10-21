@@ -60,6 +60,11 @@ void uart_helper_set_callback(UartHelper* helper, ProcessLine process_line, void
 void uart_helper_set_baud_rate(UartHelper* helper, uint32_t baud_rate);
 
 /**
+ * Sets the read text in text variable.
+ */
+bool uart_helper_read(UartHelper* helper, FuriString* text, uint32_t timeout_ms);
+
+/**
  * Sends data over the UART TX pin.
 */
 void uart_helper_send(UartHelper* helper, const char* data, size_t length);

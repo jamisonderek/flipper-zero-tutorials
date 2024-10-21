@@ -81,6 +81,17 @@ size_t ring_buffer_find_delim(RingBuffer* rb);
 void ring_buffer_extract_line(RingBuffer* rb, size_t delim_index, FuriString* line);
 
 /**
+ * Reads text from the ring buffer.  If a line is found in the buffer, it is stored in the
+ * provided FuriString and the function returns true.  If no line is found, the function
+ * returns false.
+ *
+ * @param rb   The ring buffer
+ * @param text The FuriString to store the line in
+ * @return true if a line was read, false if no line was found
+ */
+bool ring_buffer_read(RingBuffer* rb, FuriString* text);
+
+/**
  * Clears the ring buffer.  This will remove all data from the buffer.
  * 
  * @param rb The ring buffer
