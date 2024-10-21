@@ -1,35 +1,35 @@
+let event_loop = require("event_loop");
 let gpio = require("gpio");
-let gpio_spi_mosi = "PA7";
-let gpio_spi_sck = "PB3";
-let gpio_spi_cs = "PA4";
-gpio.init(gpio_spi_mosi, "outputPushPull", "none");
-gpio.init(gpio_spi_sck, "outputPushPull", "none");
-gpio.init(gpio_spi_cs, "outputPushPull", "none");
+let mosi = gpio.get("PA7");
+let sck = gpio.get("PB3");
+let cs = gpio.get("PA4");
+mosi.init({ direction: "out", outMode: "push_pull" });
+sck.init({ direction: "out", outMode: "push_pull" });
+cs.init({ direction: "out", outMode: "push_pull" });
 
 function leds(addr, data) {
-    gpio.write(gpio_spi_mosi, false);
-    gpio.write(gpio_spi_sck, false);
-    gpio.write(gpio_spi_cs, false);
+    mosi.write(false);
+    sck.write(false);
+    cs.write(false);
 
     let mask = 0x80;
     for (let i = 0; i < 8; i++) {
-        gpio.write(gpio_spi_mosi, (addr & mask) !== 0);
-        gpio.write(gpio_spi_sck, true);
-        gpio.write(gpio_spi_sck, false);
+        mosi.write((addr & mask) !== 0);
+        sck.write(true);
+        sck.write(false);
         mask >>= 1;
     }
 
     for (let i = 0; i < 8; i++) {
-        gpio.write(gpio_spi_mosi, data[i] !== ' ' && data[i] !== '0');
-        gpio.write(gpio_spi_sck, true);
-        gpio.write(gpio_spi_sck, false);
+        mosi.write(data[i] !== ' ' && data[i] !== '0');
+        sck.write(true);
+        sck.write(false);
     }
 
-    gpio.write(gpio_spi_cs, true);
-    gpio.write(gpio_spi_mosi, true);
-    gpio.write(gpio_spi_sck, true);
+    cs.write(true);
+    mosi.write(true);
+    sck.write(true);
 }
-
 
 // Initialize MAX7219 device
 leds(0xFF, "00000000");
@@ -63,7 +63,3 @@ for (let loop_counter = 0; loop_counter < 10; loop_counter++) {
 
     delay(250); // Wait 1/4 second
 }
-
-gpio.init(gpio_spi_mosi, "analog", "none");
-gpio.init(gpio_spi_sck, "analog", "none");
-gpio.init(gpio_spi_cs, "analog", "none");
