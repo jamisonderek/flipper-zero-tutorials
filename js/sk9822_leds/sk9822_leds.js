@@ -1,17 +1,23 @@
 // SK9822 RGB LED strip example
 
+// GPIO library requires importing the event_loop library
+let event_loop = require("event_loop");
 let gpio = require("gpio");
-gpio.init("PC3", "outputPushPull", "no"); // pin, mode, pull
-print("PC3 is clock");
-gpio.init("PA7", "outputPushPull", "no"); // pin, mode, pull
+
+let sck = gpio.get("PB3");
+sck.init({ direction: "out", outMode: "push_pull" });
+print("PB3 is clock");
+
+let mosi = gpio.get("PA7");
+mosi.init({ direction: "out", outMode: "push_pull" });
 print("PA7 is data");
 
 function writeByte(data) {
     for (let i = 0; i < 8; i++) {
         let mask = 1 << (7 - i);
-        gpio.write("PA7", (data & mask) === mask);
-        gpio.write("PC3", true);
-        gpio.write("PC3", false);
+        mosi.write((data & mask) === mask);
+        sck.write(true);
+        sck.write(false);
     }
 }
 
