@@ -6,7 +6,9 @@ This project was tested with [ChatGPT-4o](https://chatgpt.com/?model=gpt-4o).  T
 ## Directions
 - Step 1. Open [Chatgpt.com](https://chatgpt.com/?model=gpt-4o) and make sure you have `ChatGPT-4o` selected.
 - Step 2. Copy the contents of [intro.txt](./intro.txt) into the Message window of Chat.
-- Step 3. Drag the train*.js files into the Message window.
+- Step 3. Drag the example script files from your firmware into the Message window.
+  - [Momentum](https://github.com/Next-Flip/Momentum-Firmware/tree/dev/applications/system/js_app/examples/apps/Scripts/Examples)
+  - [Official](https://github.com/flipperdevices/flipperzero-firmware/tree/dev/applications/system/js_app/examples/apps/Scripts)
 - Step 4. Press `Ctrl`+`Enter` to get a blank line.
 - Step 5. Request a script to do some feature for the Flipper Zero!  Be sure you request something that is in [Supported Capabilities](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#capabilities) of JavaScript; or at least not in the [Not Supported](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#not-supported) for the best results.
   Example: "Create a JavaScript program for the Flipper Zero that prints 'Hello World' on the screen."
@@ -29,7 +31,7 @@ If program runs, but does not give expected result...
 Tell ChatGPT the result you got and the expected result.
 
 ## Support
-If you have any questions, please ask in my [Flipper Zero Discord](https://discord.com/invite/NsjCvqwPAd) server.  There are also giveaways and other fun things happening there.
+If you have any questions, please reach out to me on Discord (@CodeAllNight) or tag me in any of the Flipper Zero Discord servers.
 
 Support my work: 
 - Option 1. [Like, Subscribe and click the Bell (to get notified)](https://youtu.be/DAUQGeG4pc4) 
