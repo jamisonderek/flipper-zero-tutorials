@@ -1,7 +1,14 @@
 # flipper-zero-tutorials
-[Discord invite: NsjCvqwPAd](https://discord.com/invite/NsjCvqwPAd)
 
 [YouTube: @MrDerekJamison](https://YouTube.com/@MrDerekJamison)
+
+[https://github.com/jamisonderek/flipper-zero-sao](https://github.com/jamisonderek/flipper-zero-sao) is the repo for using the Flipper Zero to control SAO, effectively acting like a badge.
+
+[https://github.com/jamisonderek/flipboard](https://github.com/jamisonderek/flipboard) is the repo for using the FlipBoard accessory for the Flipper Zero. FlipBoard was created by [MakeItHackin](https://github.com/makeithackin/flipboard) with software tutorials written by me (CodeAlNight).
+
+
+[Discord invite: NsjCvqwPAd](https://discord.com/invite/NsjCvqwPAd) - Currently, I've **stopped using** my own Discord server and would prefer you either send me a direct message on Discord, or tag @CodeAllNight in any of the Flipper Zero firmware Discord servers.
+
 
 I will use this repository for my Flipper Zero projects.  The various README.md files should describe how to use the files on your Flipper Zero.
 
