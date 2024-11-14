@@ -237,7 +237,7 @@ void rolling_flaws_receive_sync_draw_callback(Canvas* canvas, void* model) {
 void rolling_flaws_receive_signal_draw_callback(Canvas* canvas, void* model) {
     RollingFlawsModel* my_model = ((RollingFlawsRefModel*)model)->model;
 
-    FuriString* str = furi_string_alloc(32);
+    FuriString* str = furi_string_alloc();
 
     canvas_set_bitmap_mode(canvas, 1);
     canvas_set_font(canvas, FontPrimary);
@@ -341,7 +341,6 @@ RollingFlaws* rolling_flaws_alloc() {
     app->model->opened = false;
 
     app->view_dispatcher = view_dispatcher_alloc();
-    view_dispatcher_enable_queue(app->view_dispatcher);
     view_dispatcher_attach_to_gui(app->view_dispatcher, gui, ViewDispatcherTypeFullscreen);
     view_dispatcher_set_event_callback_context(app->view_dispatcher, app);
     view_dispatcher_set_custom_event_callback(

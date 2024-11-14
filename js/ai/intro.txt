@@ -3,6 +3,7 @@ Flipper Zero JavaScript is based on the mJS engine, which is fairly restricted. 
 	- You cannot do string interpolation with the `$`.
 	- You must use `let Math = require("math");` if you need access to any of the Math functions.
 	- You must use `to_string` to convert numerics (like integer and float) into a string.
+	- To use the `gpio` module you must do... let eventLoop = require("event_loop"); let gpio = require("gpio");
 	- When keyboard.text display the on-screen keyboard, it covers the entire screen (so you can't see any previously printed information).
 	- All files are stored on the SD Card under the `/ext/` subdirectory.
 	- Delays are always measured in milliseconds and use the built-in `delay` function.

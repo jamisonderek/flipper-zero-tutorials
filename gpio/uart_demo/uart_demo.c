@@ -1,3 +1,4 @@
+#include <expansion/expansion.h>
 #include <furi_hal.h>
 #include <gui/gui.h>
 #include <gui/modules/submenu.h>
@@ -8,11 +9,18 @@
 #include "uart_helper.h"
 
 #define DEVICE_BAUDRATE 115200
-#define LINE_DELIMITER '\n'
+
+// Comment out the following line to process data as it is received.
+#define DEMO_PROCESS_LINE yes
+
+#ifdef DEMO_PROCESS_LINE
+#define LINE_DELIMITER         '\n'
 #define INCLUDE_LINE_DELIMITER false
+#endif
 
 typedef struct {
     Gui* gui;
+    FuriTimer* timer;
     ViewDispatcher* view_dispatcher;
     Submenu* submenu;
     uint32_t index;
@@ -65,7 +73,8 @@ static void uart_demo_submenu_item_callback(void* context, uint32_t index) {
     }
 }
 
-static void uart_demo_process_line(FuriString* line, void* context) {
+#ifdef DEMO_PROCESS_LINE
+void uart_demo_process_line(FuriString* line, void* context) {
     UartDemoApp* app = context;
     submenu_add_item(
         app->submenu,
@@ -74,6 +83,21 @@ static void uart_demo_process_line(FuriString* line, void* context) {
         uart_demo_submenu_item_callback,
         app);
 }
+#else
+void uart_demo_timer_callback(void* context) {
+    UartDemoApp* app = context;
+    FuriString* line = furi_string_alloc();
+    while(uart_helper_read(app->uart_helper, line, 0)) {
+        submenu_add_item(
+            app->submenu,
+            furi_string_get_cstr(line),
+            app->index++,
+            uart_demo_submenu_item_callback,
+            app);
+    }
+    furi_string_free(line);
+}
+#endif
 
 static bool uart_demo_navigation_callback(void* context) {
     UNUSED(context);
@@ -95,7 +119,6 @@ static UartDemoApp* uart_demo_app_alloc() {
     // dispatcher. Set the submenu as the current view.
     app->gui = furi_record_open(RECORD_GUI);
     app->view_dispatcher = view_dispatcher_alloc();
-    view_dispatcher_enable_queue(app->view_dispatcher);
     view_dispatcher_attach_to_gui(app->view_dispatcher, app->gui, ViewDispatcherTypeFullscreen);
     app->submenu = submenu_alloc();
     uart_demo_submenu_add_default_entries(app->submenu, app);
@@ -112,13 +135,21 @@ static UartDemoApp* uart_demo_app_alloc() {
     // Initialize the UART helper.
     app->uart_helper = uart_helper_alloc();
     uart_helper_set_baud_rate(app->uart_helper, DEVICE_BAUDRATE);
+#ifdef DEMO_PROCESS_LINE
     uart_helper_set_delimiter(app->uart_helper, LINE_DELIMITER, INCLUDE_LINE_DELIMITER);
     uart_helper_set_callback(app->uart_helper, uart_demo_process_line, app);
+#else
+    app->timer = furi_timer_alloc(uart_demo_timer_callback, FuriTimerTypePeriodic, app);
+    furi_timer_start(app->timer, 1000);
+#endif
 
     return app;
 }
 
 static void uart_demo_app_free(UartDemoApp* app) {
+    if(app->timer) {
+        furi_timer_free(app->timer);
+    }
     uart_helper_free(app->uart_helper);
 
     furi_string_free(app->message2);
@@ -135,8 +166,11 @@ int32_t uart_demo_main(void* p) {
     UNUSED(p);
 
     UartDemoApp* app = uart_demo_app_alloc();
+    Expansion* expansion = furi_record_open(RECORD_EXPANSION);
+    expansion_disable(expansion);
     view_dispatcher_run(app->view_dispatcher);
     uart_demo_app_free(app);
-
+    expansion_enable(expansion);
+    furi_record_close(RECORD_EXPANSION);
     return 0;
 }
