@@ -55,7 +55,7 @@ function formatTemperature(temp) {
 }
 
 for (let i = 0; i < 50; i++) {
-  let mv = tempSensor.read_analog();
+  let mv = tempSensor.readAnalog();
   let sensor_resistance = mvToSensorResistance(mv);
   let tempC = resistanceToCelsius(sensor_resistance);
   let msg = mv.toString() + " mV:";
