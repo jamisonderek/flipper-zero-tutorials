@@ -19,7 +19,7 @@ This [lf-rfid excel file](lf-rfid.xlsx) has 4 tabs.
 - Indala tab : Enter the Facility code inb cell B2 and the Card number in cell B5.  Copy E5-T5 into cell E6-T6.  The Indala26 Hex data for that facility/card will be in cell C24.  ** NOTE: AA18, AG18-AJ18 are currently set to 0, but may need to be set to another number?
 
 
-The [Keri excel file](keri.xlsx) is for a Keri encoded FC and Card number. Enter a FC (0-31) and a Card number (22-bits or less) and you will get the encoded HEX value to use with Keri. If your firmware doesn't support entering hex, you can create an RFID file (for example for FC:17, Card:1337 the HEX is 11117080):
+The [Keri excel file](Keri.xlsx) is for a Keri encoded FC and Card number. Enter a FC (0-31) and a Card number (22-bits or less) and you will get the encoded HEX value to use with Keri. If your firmware doesn't support entering hex, you can create an RFID file (for example for FC:17, Card:1337 the HEX is 11117080):
 
 ```
 Filetype: Flipper RFID key
