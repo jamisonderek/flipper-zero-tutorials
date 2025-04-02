@@ -10,7 +10,7 @@ This project was tested with [ChatGPT-4o](https://chatgpt.com/?model=gpt-4o) and
   - [RogueMaster](./roguemaster-firmware/)
   - [Momentum](./momentum-firmware)
   - [Unleashed](./unleashed-firmware)
-- Step 3. Request a script to do some feature for the Flipper Zero!  Be sure you request something that is in [Supported Capabilities](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#capabilities) of JavaScript; or at least not in the [Not Supported](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#not-supported) for the best results.
+- Step 3. Request a script to do some feature for the Flipper Zero!  Be sure you request something that is in [Supported Capabilities](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#features) of JavaScript; or at least not in the [Not Supported](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#not-supported) for the best results.
   Example: "Create a JavaScript program for the Flipper Zero that prints 'Hello World' on the screen."
 - Step 4. Click the `Copy code` button from the response.
 - Step 5. Paste the resulting script into a text file (I named my file `ai.js`).
