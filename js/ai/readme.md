@@ -3,6 +3,8 @@
 ## Overview
 This project was tested with [ChatGPT-4o](https://chatgpt.com/?model=gpt-4o) and [Grok](https://grok.com/chat).  The goal of this project is to use AI to generate JavaScript that runs on the Flipper Zero; without requiring the user to be familiar with JavaScript programming.
 
+JavaScript has a limited set of features. Be sure you request something that is in [Supported Capabilities](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#features) of JavaScript; or at least not in the [Not Supported](https://github.com/jamisonderek/flipper-zero-tutorials/wiki/JavaScript#not-supported) for the best results.
+
 ## Directions
 - Step 1. Open [Chatgpt.com](https://chatgpt.com/?model=gpt-4o) and make sure you have `ChatGPT-4o` selected.
 - Step 2. Drag the files for your firmware into the Message window.
@@ -38,4 +40,4 @@ Support my work:
 - Option 2. [https://ko-fi.com/codeallnight](https://ko-fi.com/codeallnight) (donate $3 via PayPal or Venmo) 
 - Option 3. Click the "Thanks" button on [YouTube](https://youtu.be/DAUQGeG4pc4). 
 - Option 4. Purchase a [FlipBoard](https://github.com/MakeItHackin/FlipBoard) (I get a portion of the sale).
-- Option 5. Purchase from Lab401.com using promo code: DEREK (You save 5% & I get a portion of the sale).
+- Option 5. Purchase from [Lab401.com](https://lab401.com/r?id=7c6mqp) using promo code: DEREK (You save 5% & I get a portion of the sale).
