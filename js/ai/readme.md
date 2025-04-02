@@ -38,3 +38,4 @@ Support my work:
 - Option 2. [https://ko-fi.com/codeallnight](https://ko-fi.com/codeallnight) (donate $3 via PayPal or Venmo) 
 - Option 3. Click the "Thanks" button on [YouTube](https://youtu.be/DAUQGeG4pc4). 
 - Option 4. Purchase a [FlipBoard](https://github.com/MakeItHackin/FlipBoard) (I get a portion of the sale).
+- Option 5. Purchase from Lab401.com using promo code: DEREK (You save 5% & I get a portion of the sale).
