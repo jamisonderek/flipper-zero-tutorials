@@ -132,7 +132,7 @@ sudo hackrf_transfer -r flipper-chat.rf -f 433920000 -s 8000000
 - To broadcast a message: (replace "flipper-chat.rf" with the saved file name.)
 
 ```
-sudo hackrf_transfer -r flipper-chat.rf -f 433920000 -s 8000000 -x 47
+sudo hackrf_transfer -t flipper-chat.rf -f 433920000 -s 8000000 -x 47
 ```
 
 - What I typically do is:
