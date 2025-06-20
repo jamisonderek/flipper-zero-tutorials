@@ -5,7 +5,7 @@ All of the following files are the same Princeton signal, but encoded with diffe
 - [E-P-AM270.sub](./E-P-AM270.sub) - This file use **FuriHalSubGhzPresetOok270Async** ("AM270") preset.
 - [E-P-AM650.sub](./E-P-AM650.sub) - This file use **FuriHalSubGhzPresetOok650Async** ("AM650") preset.
 - [E-P-FM238.sub](./E-P-FM238.sub) - This file use **FuriHalSubGhzPreset2FSKDev238Async** ("FM238") preset. 2.38kHz deviation.
-- [E-P-Pagers.sub](./E-P-Pagers.sub) - This file use **Custom** ("Pagers") preset. 5.16Hz deviation.
+- [E-P-Pagers.sub](./E-P-Pagers.sub) - This file use **Custom** ("Pagers") preset. 5.16Hz deviation. Data Rate is only 625Hz, so most signals will not be decoded within tolerance!
 - [E-P-FM95.sub](./E-P-FM95.sub) - This file use **Custom** ("FM95") preset. 9.52kHz deviation.
 - [E-P-FM15k.sub](./E-P-FM15k.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. PATable ramp: 00 12 0E 34 60 C5 C1 C0.
 - [E-P-Honda1.sub](./E-P-Honda1.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. (No ramp) DataRate: 14k. ACG: 33dB.
