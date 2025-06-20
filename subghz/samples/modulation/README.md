@@ -8,8 +8,8 @@ All of the following files are the same Princeton signal, but encoded with diffe
 - [E-P-Pagers.sub](./E-P-Pagers.sub) - This file use **Custom** ("Pagers") preset. 5.16Hz deviation.
 - [E-P-FM95.sub](./E-P-FM95.sub) - This file use **Custom** ("FM95") preset. 9.52kHz deviation.
 - [E-P-FM15k.sub](./E-P-FM15k.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. PATable ramp: 00 12 0E 34 60 C5 C1 C0.
-- [E-P-Honda1.sub](./E-P-FM15k.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. (No ramp) DataRate: 14k. ACG: 33dB.
-- [E-P-Honda2.sub](./E-P-FM15k.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. (No ramp) DataRate: 14k. ACG: 42dB.
+- [E-P-Honda1.sub](./E-P-Honda1.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. (No ramp) DataRate: 14k. ACG: 33dB.
+- [E-P-Honda2.sub](./E-P-Honda2.sub) - This file use **Custom** ("FM15k") preset. 15.87Hz deviation. (No ramp) DataRate: 14k. ACG: 42dB.
 - [E-P-FM476.sub](./E-P-FM476.sub) - This file use **FuriHalSubGhzPreset2FSKDev476Async** ("FM476") preset. 47.6kHz deviation.
 
 This looks at presets that uses different modulations, including ASK and GFSK.
